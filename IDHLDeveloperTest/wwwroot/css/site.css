@@ -8,6 +8,12 @@ html, body {
     padding-top: 1.1rem;
 }
 
+.character-image {
+    height: 80px;
+    width: 100px;
+    object-fit: cover;
+}
+
 #banner {
     height: 100px;
     width: 100%;

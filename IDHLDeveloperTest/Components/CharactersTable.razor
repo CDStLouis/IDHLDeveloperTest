@@ -15,6 +15,14 @@
             </tr>
         </thead>
         <tbody>
+            @foreach(var character in characterList.Data)
+            {
+                <tr>
+                    <td>@character.Id</td>
+                    <td>@character.Name</td>
+                    <td><img class="character-image" src="@character.ImageUrl"/></td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
