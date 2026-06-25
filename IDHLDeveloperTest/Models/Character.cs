@@ -10,8 +10,8 @@ namespace IDHLDeveloperTest.Models
         [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [JsonPropertyName("nameZ")]
-        public string NameZ { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [JsonPropertyName("imageUrl")]
         public string ImageUrl { get; set; }
