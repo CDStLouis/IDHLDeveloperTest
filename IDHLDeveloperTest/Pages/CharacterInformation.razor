@@ -1,0 +1,60 @@
+﻿@page "/character-information/{Id:int}"
+@inherits OwningComponentBase
+@using IDHLDeveloperTest.Models;
+@using IDHLDeveloperTest.Services;
+
+<PageTitle>Character Information</PageTitle>
+
+<div class="contentContainer">
+    <h3>@characterInfo.Data.Name</h3>
+
+    @if (characterInfo.Data.Films != null)
+    {
+        <b>Films</b>
+
+        <ul>
+            @foreach (var film in characterInfo.Data.Films)
+        {
+            <li>@film</li>
+        }
+        </ul>
+    }
+
+    @if (characterInfo.Data.TvShows != null)
+    {
+        <b>TV Shows</b>
+
+        <ul>
+            @foreach (var tvShow in characterInfo.Data.TvShows)
+        {
+            <li>@tvShow</li>
+        }
+        </ul>
+    }
+
+    @if (characterInfo.Data.VideoGames != null)
+    {
+        <b>Video Games</b>
+
+        <ul>
+            @foreach (var videoGame in characterInfo.Data.VideoGames)
+        {
+            <li>@videoGame</li>
+        }
+        </ul>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    protected IClientService clientService;
+    private CharacterInfo characterInfo = new CharacterInfo();
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
+        characterInfo = await clientService.GetCharacter(Id);
+    }
+}

@@ -17,9 +17,9 @@ namespace IDHLDeveloperTest.Services
             return await GetDisneyResource<CharacterList>($"character?page={pageNumber}");
         }
 
-        public async Task<Character> GetCharacter(int id)
+        public async Task<CharacterInfo> GetCharacter(int id)
         {
-            return new Character();
+            return await GetDisneyResource<CharacterInfo>($"character/{id}");
         }
 
         private async Task<T> GetDisneyResource<T>(string path)
