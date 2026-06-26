@@ -71,9 +71,7 @@
         }
         else
         {
-            searchText = "";
-            pageStatus = "Page: 1";
-            characters = await clientService.GetCharacters(1);
+            await ChangePage(currentPage);
         }
     }
 }
