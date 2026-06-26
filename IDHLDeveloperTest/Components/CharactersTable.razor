@@ -55,8 +55,7 @@
 
     private async Task ChangePage(int page)
     {
-        currentPage = page;
-        clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
+        currentPage = page;        
         characters = await clientService.GetCharacters(page);
     }
 
