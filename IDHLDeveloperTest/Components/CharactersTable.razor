@@ -57,6 +57,7 @@
     {
         currentPage = page;        
         characters = await clientService.GetCharacters(page);
+        searchText = "";
     }
 
     private async Task FilterByName()
