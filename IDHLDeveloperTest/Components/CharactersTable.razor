@@ -60,7 +60,7 @@
         searchText = "";
     }
 
-    private async Task FilterByName()
+    private void FilterByName()
     {
         characters.Data = allCharacters.Data.Where(c => c.Name.ToLower().Contains(searchText.ToLower()));
     }
