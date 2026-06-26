@@ -14,6 +14,10 @@ html, body {
     object-fit: cover;
 }
 
+.tablePagination {
+    float: right;
+}
+
 #banner {
     height: 100px;
     width: 100%;

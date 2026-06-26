@@ -1,9 +1,11 @@
-﻿<button disabled="@(CurrentPage <= 1)" @onclick="() => OnChangePage.InvokeAsync(CurrentPage - 1)">
-    Previous Page
-</button>
-<button disabled="@(CurrentPage >= TotalPages)" @onclick="() => OnChangePage.InvokeAsync(CurrentPage + 1)">
-    Next Page
-</button>
+﻿<div class="tablePagination">
+    <button disabled="@(CurrentPage <= 1)" @onclick="() => OnChangePage.InvokeAsync(CurrentPage - 1)">
+        Previous Page
+    </button>
+    <button disabled="@(CurrentPage >= TotalPages)" @onclick="() => OnChangePage.InvokeAsync(CurrentPage + 1)">
+        Next Page
+    </button>
+</div>
 
 @code {
     [Parameter]
