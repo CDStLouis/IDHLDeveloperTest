@@ -6,12 +6,13 @@
 
 
 <div style="padding: 10px;">
-    <input @bind="searchText" @bind:event="oninput" @bind:after="FilterByName" placeholder="Search by character name..." />
+    <input @bind="searchText" @bind:event="oninput" @bind:after="FilterByName" placeholder="Search by character name" />    
     <TablePagination 
         CurrentPage="@currentPage" 
         TotalPages="@totalPages" 
         OnChangePage="ChangePage">
     </TablePagination>
+    <p class="pageStatus">@pageStatus</p>
     <table class="table">
         <thead>
             <tr>
@@ -41,27 +42,37 @@
 @code {
     protected IClientService clientService;
     private CharacterList characters = new CharacterList();
-    private CharacterList allCharacters = new CharacterList();
     private int currentPage = 1;
     private int totalPages => characters.Info.TotalPages;
     private string searchText = "";
+    private string pageStatus =  "Page: 1";
 
     protected override async Task OnInitializedAsync()
     {
         clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
         characters = await clientService.GetCharacters(1);
-        allCharacters = await clientService.GetAllCharacters();
     }
 
     private async Task ChangePage(int page)
     {
-        currentPage = page;        
+        currentPage = page;
+        pageStatus = $"Page:{page}";
         characters = await clientService.GetCharacters(page);
-        searchText = "";
+        searchText = "";        
     }
 
-    private void FilterByName()
+    private async Task FilterByName()
     {
-        characters.Data = allCharacters.Data.Where(c => c.Name.ToLower().Contains(searchText.ToLower()));
+        if (searchText != "")
+        {
+            pageStatus = $"All Pages";
+            characters = await clientService.GetCharactersByName(searchText);
+        }
+        else
+        {
+            searchText = "";
+            pageStatus = "Page: 1";
+            characters = await clientService.GetCharacters(1);
+        }
     }
 }

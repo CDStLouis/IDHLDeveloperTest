@@ -18,6 +18,10 @@ html, body {
     float: right;
 }
 
+.pageStatus {
+    text-align: right;
+}
+
 #banner {
     height: 100px;
     width: 100%;

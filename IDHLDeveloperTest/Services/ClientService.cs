@@ -11,12 +11,7 @@ namespace IDHLDeveloperTest.Services
         {
             _httpClientFactory = httpClientFactory;
         }
-
-        public async Task<CharacterList> GetAllCharacters()
-        {
-            return await GetDisneyResource<CharacterList>("character");
-        }
-
+        
         public async Task<CharacterList> GetCharacters(int pageNumber)
         {
             return await GetDisneyResource<CharacterList>($"character?page={pageNumber}");
@@ -25,6 +20,11 @@ namespace IDHLDeveloperTest.Services
         public async Task<CharacterInfo> GetCharacter(int id)
         {
             return await GetDisneyResource<CharacterInfo>($"character/{id}");
+        }
+
+        public async Task<CharacterList> GetCharactersByName(string name)
+        {
+            return await GetDisneyResource<CharacterList>($"character?name={name.Replace(" ", "%20")}");
         }
 
         private async Task<T> GetDisneyResource<T>(string path)
