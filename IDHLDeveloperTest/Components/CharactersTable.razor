@@ -5,7 +5,12 @@
 <h3>All Characters</h3>
 
 
-<div style="padding: 10px;">
+<div style="padding: 10px;">    
+    <TablePagination 
+        CurrentPage="@currentPage" 
+        TotalPages="@totalPages" 
+        OnChangePage="ChangePage">
+    </TablePagination>
     <table class="table">
         <thead>
             <tr>
@@ -25,16 +30,30 @@
             }
         </tbody>
     </table>
+    <TablePagination 
+        CurrentPage="@currentPage" 
+        TotalPages="@totalPages" 
+        OnChangePage="ChangePage">
+    </TablePagination>
 </div>
 
 @code {
     protected IClientService clientService;
     private CharacterList characterList = new CharacterList();
+    private int currentPage = 1;
+    private int totalPages => characterList.Info.TotalPages;
 
     protected override async Task OnInitializedAsync()
     {
         clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
         characterList = await clientService.GetCharacters(1);
+    }
+
+    private async Task ChangePage(int page)
+    {
+        currentPage = page;
+        clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
+        characterList = await clientService.GetCharacters(page);
     }
 
 }

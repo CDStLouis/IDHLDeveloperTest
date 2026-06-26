@@ -1,0 +1,18 @@
+﻿<button disabled="@(CurrentPage <= 1)" @onclick="() => OnChangePage.InvokeAsync(CurrentPage - 1)">
+    Previous Page
+</button>
+<button disabled="@(CurrentPage >= TotalPages)" @onclick="() => OnChangePage.InvokeAsync(CurrentPage + 1)">
+    Next Page
+</button>
+
+@code {
+    [Parameter]
+    public int CurrentPage { get; set; }
+
+    [Parameter]
+    public int TotalPages { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnChangePage { get; set; }
+
+}
